@@ -1,13 +1,14 @@
 import React from 'react';
 import './navbar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useCart } from '../../context/CartContext';
+// import { useCart } from '../../context/CartContext';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const Navbar = () => {
-  const { getCartCount } = useCart();
+  // const { getCartCount } = useCart();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ export const Navbar = () => {
     className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"
     style={{ fontSize: "0.7rem" }}
   >
-    {getCartCount()}
+    {/* {getCartCount()} */}
   </span>
 </Link>
 

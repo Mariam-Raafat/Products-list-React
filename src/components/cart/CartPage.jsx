@@ -1,8 +1,11 @@
-import { useCart } from "../../context/CartContext";
+// import { useCart } from "../../context/CartContext";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { addToCart } from "../stor/counterSlice";
 export const CartPage = () => {
-  const { cartItems, addToCart, removeFromCart, deleteFromCart } = useCart();
+  const cartItems = []
+  // const { cartItems, addToCart, removeFromCart, deleteFromCart } = useCart();
+  const dispatch = useDispatch();
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -39,7 +42,7 @@ export const CartPage = () => {
                   <button
                     className="btn btn-success btn-sm ms-2"
                     onClick={() => {
-                      if (item.quantity < item.stock) addToCart(item);
+                      if (item.quantity < item.stock) dispatch(addToCart(item));
                     }}
                   >
                     +
