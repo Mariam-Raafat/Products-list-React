@@ -1,29 +1,20 @@
-// import { useCart } from "../../context/CartContext";
-import { useAuth } from "../../context/AuthContext";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../stor/counterSlice";
+import { addToCart,removeFromCart } from "../../store/counterSlice";
 import { useSelector } from "react-redux";
 export const AddToCartButton = ({ product }) => {
-  // const { cartItems, removeFromCart } = useCart();
-    const cartItems = useSelector((state) => state.count.cartItems); 
-console.log("cartItems".cartItems)
-  const { isAuthenticated } = useAuth();
+const cartItems = useSelector((state) => state.count.cartItems); 
   const itemInCart = cartItems.find((item) => item.id === product.id);
   const quantity = itemInCart?.quantity || 0;
   const dispatch = useDispatch();
   
   const handleAdd = () => {
-    if (!isAuthenticated) {
-      alert("Please login to add products to cart");
-      return;
-    }
     if (quantity < product.stock) {
       dispatch(addToCart(product));
     }
   };
 
   const handleRemove = () => {
-    // removeFromCart(product.id);
+    dispatch(removeFromCart(product.id));
   };
 
   return (

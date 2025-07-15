@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const { register, handleSubmit } = useForm();
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -12,7 +10,7 @@ export const RegisterPage = () => {
       alert("Please fill all fields");
       return;
     }
-    login("fake-register-token");
+    localStorage.setItem("token", "fake_token_123");
     navigate("/");
   };
 

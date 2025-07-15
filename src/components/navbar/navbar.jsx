@@ -1,21 +1,17 @@
-import React from 'react';
 import './navbar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { useCart } from '../../context/CartContext';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-
+import { useSelector } from 'react-redux';
 export const Navbar = () => {
-  // const { getCartCount } = useCart();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-
   const handleSearch = (e) => {
     e.preventDefault();
     navigate(`/products-list?search=${search}`);
+    setSearch("");
   };
+  const CartCount = useSelector((state) =>state.count.cartItems.reduce((total, item) => total + item.quantity, 0));
     return (
         <nav className="navbar sticky-top navbar-expand-lg bg-warning px-3 mb-5">
             <div className="d-flex justify-content-between align-items-center container">
@@ -44,7 +40,7 @@ export const Navbar = () => {
     className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"
     style={{ fontSize: "0.7rem" }}
   >
-    {/* {getCartCount()} */}
+    {CartCount}
   </span>
 </Link>
 
