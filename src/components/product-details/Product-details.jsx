@@ -1,28 +1,34 @@
 import { useEffect,useState } from "react";
 import { useParams,useNavigate } from "react-router-dom";
-import { Product } from "../product/Product";
-import axios from 'axios';
 import { range } from "../rating/Rating";
 import { AddToCartButton } from "../addBtn/AddBtn";
+import { useSelector } from "react-redux";
+import axiosInterceptor from "../../interceptors/interceptor";
 export const ProductDetails = () => {
   const { id } = useParams(); 
  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
  const navigate = useNavigate();
+  const isLoading = useSelector((state) => state.loading.isLoading);
   useEffect(() => {
-    axios
-      .get(`https://dummyjson.com/products/${id}`)
+    axiosInterceptor
+      .get(`/products/${id}`)
       .then((res) => {
         setProduct(res.data);
-        setLoading(false);
       })
       .catch((err) => {
         console.error(err);
-        setLoading(false);
       });
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (isLoading){
+    return <>  
+ <div className="text-center w-100">
+    <div className="spinner-border text-warning" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  </div>;
+    </>
+  } 
   if (!product) return <p>Product not found</p>;
 
   return (

@@ -1,11 +1,8 @@
-// LoginPage.jsx
 import { useForm } from "react-hook-form";
-import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const { register, handleSubmit } = useForm();
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -13,8 +10,8 @@ export const LoginPage = () => {
       alert("Please fill all fields");
       return;
     }
-    login("fake-login-token");
-    navigate("/");
+    localStorage.setItem("token", "fake_token_123");
+    navigate("/cart");
   };
 
   return (

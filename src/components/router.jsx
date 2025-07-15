@@ -6,6 +6,7 @@ import { CartPage } from './cart/CartPage';
 import { LoginPage } from './login/LoginPage';
 import { RegisterPage } from './register/RegisterPage';
 import { ProductsList } from './products-list/Products-list';
+import ProtectedRoute from './protectedRoute';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -20,7 +21,12 @@ export const router = createBrowserRouter([
      },
      {
         path: 'cart',
-        element: <CartPage />
+       
+        element:(
+        <ProtectedRoute>
+         <CartPage />
+        </ProtectedRoute>
+        )
      },
      {
         path:'login',
